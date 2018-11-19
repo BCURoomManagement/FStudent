@@ -18,7 +18,7 @@ public class DeleteProficiencyServlet extends HttpServlet {
         resp.setContentType("text/json;charset=UTF-8");
 
         PrintWriter out=resp.getWriter();
-        String username = new String(req.getParameter("username").getBytes("UTF-8"),"UTF-8");
+        String username = new String(req.getParameter("username").getBytes("iso8859-1"),"UTF-8");
 
         out.print(new ProficiencyDao().deleteProficiency(username));
 
