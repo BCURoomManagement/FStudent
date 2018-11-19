@@ -1,6 +1,9 @@
 package com.overseas.servlet.xsServlet;
 
+import com.overseas.dao.StudyDao;
 import com.overseas.dao.XsDao;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
+
 @WebServlet("/AddXsServlet")
 public class AddXsServlet extends HttpServlet {
     @Override
@@ -21,11 +26,22 @@ public class AddXsServlet extends HttpServlet {
 
 
         String username = new String(req.getParameter("username").getBytes("iso8859-1"),"UTF-8");
-        String papers = new String(req.getParameter("papers").getBytes("iso8859-1"),"UTF-8");
-        String time = new String(req.getParameter("time").getBytes("iso8859-1"),"UTF-8");
-        String periodical = new String(req.getParameter("periodical").getBytes("iso8859-1"),"UTF-8");
+        String dataarry = URLDecoder.decode(req.getParameter("domains"),"UTF-8");
+        String papers = null;
+        String time = null;
+        String periodical = null;
 
-        out.print(new XsDao().insertXs(username, papers, time, periodical));
+        JSONArray data = JSONArray.fromObject(dataarry);
+        for (int i=0 ;i<data.size();i++){
+            JSONObject jsonObject  =  data.getJSONObject(i) ;
+            System.out.println(data);
+            papers = jsonObject.getString( "papers") ;
+            time = jsonObject.getString( "time") ;
+            periodical = jsonObject.getString( "periodical") ;
+            new XsDao().insertXs(username, papers, time, periodical);
+        }
+        out.flush();
+        out.close();
 
 
     }

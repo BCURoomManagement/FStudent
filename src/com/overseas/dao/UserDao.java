@@ -39,15 +39,22 @@ public class UserDao {
         String sql="select * from overseas.login where username=? and password=?";
         Connection conn=util.getConnection();
         try {
+            String usname = null;
             PreparedStatement pstmt=conn.prepareStatement(sql);
             pstmt.setString(1,username);
             pstmt.setString(2,password);
             ResultSet rs=pstmt.executeQuery();
-            if(rs.next())
+            while (rs.next())
+            {
+                usname = rs.getString(1);
+            }
+            System.out.println(usname);
+            if (usname != null)
             {
                 conn.close();
                 return true;
             }
+
             conn.close();
         }catch (Exception e)
         {

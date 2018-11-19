@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("utf-8");
         resp.setContentType("text/json;charset= UTF-8");
@@ -25,7 +26,6 @@ public class UserServlet extends HttpServlet {
             out.println("true");
         else
             out.println("false");
-
     }
 
 

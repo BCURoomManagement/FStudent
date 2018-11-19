@@ -1,6 +1,8 @@
 package com.overseas.servlet.familyServlet;
 
 import com.overseas.dao.FamilyDao;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,15 +22,20 @@ public class AddFamilyServlet extends HttpServlet {
         PrintWriter out=resp.getWriter();
 
         String username = new String(req.getParameter("username").getBytes("iso8859-1"),"UTF-8");
-        String name = new String(req.getParameter("name").getBytes("iso8859-1"),"UTF-8");
-        String age = new String(req.getParameter("age").getBytes("iso8859-1"),"UTF-8");
-        String employment = new String(req.getParameter("employment").getBytes("iso8859-1"),"UTF-8");
-        String tel = new String(req.getParameter("tel").getBytes("iso8859-1"),"UTF-8");
-        String type = new String(req.getParameter("type").getBytes("iso8859-1"),"UTF-8");
+        String Father = new String(req.getParameter("Father").getBytes("iso8859-1"),"UTF-8");
+        String Mother = new String(req.getParameter("Mother").getBytes("iso8859-1"),"UTF-8");
+        String Daughter = new String(req.getParameter("Daughter").getBytes("iso8859-1"),"UTF-8");
+        String Spouse = new String(req.getParameter("Spouse").getBytes("iso8859-1"),"UTF-8");
 
-        out.print(new FamilyDao().insertFamily(username, name, age, employment, tel, type));
+        JSONObject father  =  JSONObject.fromObject(Father) ;
+        JSONObject mother  =  JSONObject.fromObject(Mother) ;
+        JSONObject daughter  =  JSONObject.fromObject(Daughter) ;
+        JSONObject spouse  =  JSONObject.fromObject(Spouse) ;
 
-
-
+        System.out.println(father);
+        new FamilyDao().insertFamily(username, father.getString( "FatherName"), father.getString( "FatherNumber"), father.getString( "FatherEmployment"), father.getString( "Fathermail"), "1");
+        new FamilyDao().insertFamily(username, mother.getString( "MotherName"), mother.getString( "MotherNumber"), mother.getString( "MotherEmployment"), mother.getString( "Mothermail"), "2");
+        new FamilyDao().insertFamily(username, spouse.getString( "SpouseName"), spouse.getString( "SpouseNumber"), spouse.getString( "SpouseEmployment"), spouse.getString( "Spousemail"), "4");
+        new FamilyDao().insertFamily(username, daughter.getString( "DaughterName"), daughter.getString( "DaughterNumber"), daughter.getString( "DaughterEmployment"), daughter.getString( "Daughtermail"), "3");
     }
 }
