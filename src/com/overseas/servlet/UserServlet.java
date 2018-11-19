@@ -17,8 +17,8 @@ public class UserServlet extends HttpServlet {
         resp.setCharacterEncoding("utf-8");
         resp.setContentType("text/json;charset= UTF-8");
         PrintWriter out=resp.getWriter();
-        String username = new String(req.getParameter("username").getBytes("iso8859-1"),"UTF-8");
-        String password = new String(req.getParameter("password").getBytes("iso8859-1"),"UTF-8");
+        String username = new String(req.getParameter("username").getBytes("UTF-8"),"UTF-8");
+        String password = new String(req.getParameter("password").getBytes("UTF-8"),"UTF-8");
         //登录操作
         boolean rs=new UserDao().checkUser(username,password);
         if(rs)
@@ -41,12 +41,12 @@ public class UserServlet extends HttpServlet {
          * 2.删除操作
          * 3.修改操作
          */
-        String uType = new String(req.getParameter("utype").getBytes("iso8859-1"),"UTF-8");
+        String uType = new String(req.getParameter("utype").getBytes("UTF-8"),"UTF-8");
 
-        String username = new String(req.getParameter("username").getBytes("iso8859-1"),"UTF-8");
-        String oldusername = new String(req.getParameter("oldusername").getBytes("iso8859-1"),"UTF-8");
-        String password = new String(req.getParameter("password").getBytes("iso8859-1"),"UTF-8");
-        String type = new String(req.getParameter("type").getBytes("iso8859-1"),"UTF-8");
+        String username = new String(req.getParameter("username").getBytes("UTF-8"),"UTF-8");
+        String oldusername = new String(req.getParameter("oldusername").getBytes("UTF-8"),"UTF-8");
+        String password = new String(req.getParameter("password").getBytes("UTF-8"),"UTF-8");
+        String type = new String(req.getParameter("type").getBytes("UTF-8"),"UTF-8");
 
         switch (uType)
         {

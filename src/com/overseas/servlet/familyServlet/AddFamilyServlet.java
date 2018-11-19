@@ -21,11 +21,11 @@ public class AddFamilyServlet extends HttpServlet {
 
         PrintWriter out=resp.getWriter();
 
-        String username = new String(req.getParameter("username").getBytes("iso8859-1"),"UTF-8");
-        String Father = new String(req.getParameter("Father").getBytes("iso8859-1"),"UTF-8");
-        String Mother = new String(req.getParameter("Mother").getBytes("iso8859-1"),"UTF-8");
-        String Daughter = new String(req.getParameter("Daughter").getBytes("iso8859-1"),"UTF-8");
-        String Spouse = new String(req.getParameter("Spouse").getBytes("iso8859-1"),"UTF-8");
+        String username = new String(req.getParameter("username").getBytes("UTF-8"),"UTF-8");
+        String Father = new String(req.getParameter("Father").getBytes("UTF-8"),"UTF-8");
+        String Mother = new String(req.getParameter("Mother").getBytes("UTF-8"),"UTF-8");
+        String Daughter = new String(req.getParameter("Daughter").getBytes("UTF-8"),"UTF-8");
+        String Spouse = new String(req.getParameter("Spouse").getBytes("UTF-8"),"UTF-8");
 
         JSONObject father  =  JSONObject.fromObject(Father) ;
         JSONObject mother  =  JSONObject.fromObject(Mother) ;

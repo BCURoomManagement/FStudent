@@ -20,13 +20,13 @@ public class ProposedServlet extends HttpServlet {
 
         PrintWriter out=resp.getWriter();
 
-        String username = new String(req.getParameter("username").getBytes("iso8859-1"),"UTF-8");
-        String degree = new String(req.getParameter("degree").getBytes("iso8859-1"),"UTF-8");
-        String subject = new String(req.getParameter("subject").getBytes("iso8859-1"),"UTF-8");
-        String ym_f = new String(req.getParameter("ym_f").getBytes("iso8859-1"),"UTF-8");
-        String ym_l = new String(req.getParameter("ym_l").getBytes("iso8859-1"),"UTF-8");
-        String details = new String(req.getParameter("details").getBytes("iso8859-1"),"UTF-8");
-        String type = new String(req.getParameter("type").getBytes("iso8859-1"),"UTF-8");
+        String username = new String(req.getParameter("username").getBytes("UTF-8"),"UTF-8");
+        String degree = new String(req.getParameter("degree").getBytes("UTF-8"),"UTF-8");
+        String subject = new String(req.getParameter("subject").getBytes("UTF-8"),"UTF-8");
+        String ym_f = new String(req.getParameter("ym_f").getBytes("UTF-8"),"UTF-8");
+        String ym_l = new String(req.getParameter("ym_l").getBytes("UTF-8"),"UTF-8");
+        String details = new String(req.getParameter("details").getBytes("UTF-8"),"UTF-8");
+        String type = new String(req.getParameter("type").getBytes("UTF-8"),"UTF-8");
 
 
         switch (type)

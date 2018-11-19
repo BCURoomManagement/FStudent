@@ -12,7 +12,7 @@ public class ProposedDao {
     DBUtil util=new DBUtil();
     public boolean insertProposed(String username, String degree, String subject, String ym_f, String ym_l, String details)
     {
-        String sql="insert into overseas.processed (username,degree,subject,ym_f,ym_l,details) values (?,?,?,?,?,?)";
+        String sql="insert into overseas.proposed (username,degree,subject,ym_f,ym_l,details) values (?,?,?,?,?,?)";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);

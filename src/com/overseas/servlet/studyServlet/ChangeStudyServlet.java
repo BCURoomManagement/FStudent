@@ -19,11 +19,11 @@ public class ChangeStudyServlet extends HttpServlet {
 
         PrintWriter out=resp.getWriter();
 
-        String username = new String(req.getParameter("username").getBytes("iso8859-1"),"UTF-8");
-        String unit = new String(req.getParameter("unit").getBytes("iso8859-1"),"UTF-8");
-        String btime = new String(req.getParameter("btime").getBytes("iso8859-1"),"UTF-8");
-        String ltime = new String(req.getParameter("ltime").getBytes("iso8859-1"),"UTF-8");
-        String obj = new String(req.getParameter("obj").getBytes("iso8859-1"),"UTF-8");
+        String username = new String(req.getParameter("username").getBytes("UTF-8"),"UTF-8");
+        String unit = new String(req.getParameter("unit").getBytes("UTF-8"),"UTF-8");
+        String btime = new String(req.getParameter("btime").getBytes("UTF-8"),"UTF-8");
+        String ltime = new String(req.getParameter("ltime").getBytes("UTF-8"),"UTF-8");
+        String obj = new String(req.getParameter("obj").getBytes("UTF-8"),"UTF-8");
 
         out.print(new StudyDao().changeStudy(username, unit, btime, ltime, obj));
     }

@@ -24,11 +24,11 @@ public class XsServlet extends HttpServlet {
         PrintWriter out=resp.getWriter();
 
 
-        String username = new String(req.getParameter("username").getBytes("iso8859-1"),"UTF-8");
-        String papers = new String(req.getParameter("papers").getBytes("iso8859-1"),"UTF-8");
-        String time = new String(req.getParameter("time").getBytes("iso8859-1"),"UTF-8");
-        String periodical = new String(req.getParameter("periodical").getBytes("iso8859-1"),"UTF-8");
-        String type = new String(req.getParameter("periodical").getBytes("iso8859-1"),"UTF-8");
+        String username = new String(req.getParameter("username").getBytes("UTF-8"),"UTF-8");
+        String papers = new String(req.getParameter("papers").getBytes("UTF-8"),"UTF-8");
+        String time = new String(req.getParameter("time").getBytes("UTF-8"),"UTF-8");
+        String periodical = new String(req.getParameter("periodical").getBytes("UTF-8"),"UTF-8");
+        String type = new String(req.getParameter("periodical").getBytes("UTF-8"),"UTF-8");
 
         /**
          * type
