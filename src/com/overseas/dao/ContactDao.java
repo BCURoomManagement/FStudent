@@ -12,7 +12,7 @@ public class ContactDao {
     DBUtil util=new DBUtil();
     public boolean insertContact(String username, String name, String tel, String fax, String address)
     {
-        String sql="insert into overseas.contact (username,name.tel,fax,address) values(?,?,?,?,?)";
+        String sql="insert into overseas.contact (username,name,tel,fax,address) values(?,?,?,?,?)";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);

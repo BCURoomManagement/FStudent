@@ -22,6 +22,7 @@ public class AddStudyServlet extends HttpServlet {
         resp.setContentType("text/json;charset=UTF-8");
 
         PrintWriter out=resp.getWriter();
+
         String dataarry = URLDecoder.decode(req.getParameter("domains"),"UTF-8");
         String username =  URLDecoder.decode(req.getParameter("username"),"UTF-8");
         String unit = null;
@@ -32,23 +33,15 @@ public class AddStudyServlet extends HttpServlet {
 //2、使用JSONArray
         JSONArray data = JSONArray.fromObject(dataarry);
         for (int i=0 ;i<data.size();i++){
-            JSONObject   jsonObject  =  data.getJSONObject(i) ;
+            JSONObject jsonObject  =  data.getJSONObject(i) ;
             System.out.println(data);
-             unit = jsonObject.getString( "Previous") ;
-             btime = jsonObject.getString( "fromdate") ;
-             ltime = jsonObject.getString( "todate") ;
-             obj = jsonObject.getString( "Fields") ;
+            unit = jsonObject.getString( "Previous") ;
+            btime = jsonObject.getString( "fromdate") ;
+            ltime = jsonObject.getString( "todate") ;
+            obj = jsonObject.getString( "Fields") ;
             new StudyDao().insertStudy(username, unit, btime, ltime, obj);
         }
         out.flush();
         out.close();
-
-//        String username = new String(req.getParameter("username").getBytes("UTF-8"),"UTF-8");
-//        String unit = new String(req.getParameter("unit").getBytes("UTF-8"),"UTF-8");
-//        String btime = new String(req.getParameter("btime").getBytes("UTF-8"),"UTF-8");
-//        String ltime = new String(req.getParameter("ltime").getBytes("UTF-8"),"UTF-8");
-//        String obj = new String(req.getParameter("obj").getBytes("UTF-8"),"UTF-8");
-
-
     }
 }

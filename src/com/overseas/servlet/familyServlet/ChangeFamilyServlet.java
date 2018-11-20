@@ -19,13 +19,13 @@ public class ChangeFamilyServlet extends HttpServlet {
 
         PrintWriter out=resp.getWriter();
 
-        String username = new String(req.getParameter("username").getBytes("UTF-8"),"UTF-8");
-        String name = new String(req.getParameter("name").getBytes("UTF-8"),"UTF-8");
-        String age = new String(req.getParameter("age").getBytes("UTF-8"),"UTF-8");
-        String employment = new String(req.getParameter("employment").getBytes("UTF-8"),"UTF-8");
-        String tel = new String(req.getParameter("tel").getBytes("UTF-8"),"UTF-8");
-        String type = new String(req.getParameter("type").getBytes("UTF-8"),"UTF-8");
-        String utype = new String(req.getParameter("utype").getBytes("UTF-8"),"UTF-8");
+        String username = new String(req.getParameter("username").getBytes("iso8859-1"),"UTF-8");
+        String name = new String(req.getParameter("name").getBytes("iso8859-1"),"UTF-8");
+        String age = new String(req.getParameter("age").getBytes("iso8859-1"),"UTF-8");
+        String employment = new String(req.getParameter("employment").getBytes("iso8859-1"),"UTF-8");
+        String tel = new String(req.getParameter("tel").getBytes("iso8859-1"),"UTF-8");
+        String type = new String(req.getParameter("type").getBytes("iso8859-1"),"UTF-8");
+        String utype = new String(req.getParameter("utype").getBytes("iso8859-1"),"UTF-8");
 
         out.print(new FamilyDao().changeFamily(username, name, age, employment, tel, type));
 

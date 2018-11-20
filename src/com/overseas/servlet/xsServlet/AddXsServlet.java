@@ -1,6 +1,5 @@
 package com.overseas.servlet.xsServlet;
 
-import com.overseas.dao.StudyDao;
 import com.overseas.dao.XsDao;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -25,23 +24,23 @@ public class AddXsServlet extends HttpServlet {
         PrintWriter out=resp.getWriter();
 
 
-        String username = new String(req.getParameter("username").getBytes("iso8859-1"),"UTF-8");
-        String dataarry = URLDecoder.decode(req.getParameter("domains"),"UTF-8");
-        String papers = null;
-        String time = null;
-        String periodical = null;
-
-        JSONArray data = JSONArray.fromObject(dataarry);
-        for (int i=0 ;i<data.size();i++){
-            JSONObject jsonObject  =  data.getJSONObject(i) ;
-            System.out.println(data);
-            papers = jsonObject.getString( "papers") ;
-            time = jsonObject.getString( "time") ;
-            periodical = jsonObject.getString( "periodical") ;
-            new XsDao().insertXs(username, papers, time, periodical);
-        }
-        out.flush();
-        out.close();
+//        String dataarry = URLDecoder.decode(req.getParameter("domains"),"UTF-8");
+//        String username =  URLDecoder.decode(req.getParameter("username"),"UTF-8");
+//        String papers = null;
+//        String time = null;
+//        String periodical = null;
+//
+//        JSONArray data = JSONArray.fromObject(dataarry);
+//        for (int i=0 ;i<data.size();i++){
+//            JSONObject jsonObject  =  data.getJSONObject(i) ;
+//            System.out.println(data);
+//            papers = jsonObject.getString( "papers") ;
+//            time = jsonObject.getString( "time") ;
+//
+//            new XsDao().insertXs(username, papers, time);
+//        }
+//        out.flush();
+//        out.close();
 
 
     }

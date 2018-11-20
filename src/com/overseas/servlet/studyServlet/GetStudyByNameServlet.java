@@ -20,7 +20,7 @@ public class GetStudyByNameServlet extends HttpServlet {
 
         PrintWriter out=resp.getWriter();
 
-        String username = new String(req.getParameter("username").getBytes("UTF-8"),"UTF-8");
+        String username = new String(req.getParameter("username").getBytes("iso8859-1"),"UTF-8");
 
         JSONArray ja=JSONArray.fromObject(new StudyDao().getStudyByName(username));
         out.print(ja);

@@ -10,16 +10,15 @@ import java.util.ArrayList;
 
 public class XsDao {
     DBUtil util=new DBUtil();
-    public boolean insertXs(String username, String papers, String time, String periodical)
+    public boolean insertXs(String username, String papers, String time)
     {
-        String sql="insert into overseas.xs (username,papers,time,periodical) values (?,?,?,?)";
+        String sql="insert into overseas.xs (username,papers,time) values (?,?,?)";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);
             pstmt.setString(1,username);
             pstmt.setString(2,papers);
             pstmt.setString(3,time);
-            pstmt.setString(4,periodical);
             if (pstmt.executeUpdate()>0)
             {
                 conn.close();

@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 public class FamilyDao {
     DBUtil util=new DBUtil();
-    public boolean insertFamily(String username, String name,  String employment, String tel,String age, String type)
+    public boolean insertFamily(String username, String name, String age, String employment, String tel, String type)
     {
-        String sql="insert into overseas.family (username,name,age,employment,tel,type)";
+        String sql="insert into overseas.family (username,name,age,employment,tel,type)  values(?,?,?,?,?,?)";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);

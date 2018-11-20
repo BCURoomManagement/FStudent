@@ -23,7 +23,7 @@ public class AddProficiencyServlet extends HttpServlet {
         String level_c=new String(req.getParameter("level_c").getBytes("iso8859-1"),"UTF-8");
         String proficiency_e=new String(req.getParameter("proficiency_e").getBytes("iso8859-1"),"UTF-8");
         String level_e=new String(req.getParameter("level_e").getBytes("iso8859-1"),"UTF-8");
-
+        System.out.println(username);
         out.print(new ProficiencyDao().insertProficiency(username, proficiency_c, level_c, proficiency_e, level_e));
 
     }

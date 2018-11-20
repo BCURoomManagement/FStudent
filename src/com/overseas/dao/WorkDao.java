@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class WorkDao {
     DBUtil util = new DBUtil();
 
-    public boolean insertWork(String username, String unit, String btime, String ltime) {
-        String sql = "insert into overseas.work (username,unit,btime,ltime) values (?,?,?,?)";
+    public boolean insertWork(String username, String unit, String btime, String ltime,String obj) {
+        String sql = "insert into overseas.work (username,unit,btime,ltime,obj) values (?,?,?,?,?)";
         Connection conn = util.getConnection();
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -21,6 +21,7 @@ public class WorkDao {
             pstmt.setString(2, unit);
             pstmt.setString(3, btime);
             pstmt.setString(4, ltime);
+            pstmt.setString(5, obj);
             if (pstmt.executeUpdate() > 0) {
                 conn.close();
                 return true;

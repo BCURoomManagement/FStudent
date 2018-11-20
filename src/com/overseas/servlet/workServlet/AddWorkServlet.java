@@ -23,7 +23,6 @@ public class AddWorkServlet extends HttpServlet {
         resp.setCharacterEncoding("utf-8");
         PrintWriter out=resp.getWriter();
 
-
         String dataarry = URLDecoder.decode(req.getParameter("domains"),"UTF-8");
         String username =  URLDecoder.decode(req.getParameter("username"),"UTF-8");
         String unit = null;
@@ -34,16 +33,16 @@ public class AddWorkServlet extends HttpServlet {
         JSONArray data = JSONArray.fromObject(dataarry);
         for (int i=0 ;i<data.size();i++){
             JSONObject jsonObject  =  data.getJSONObject(i) ;
-            System.out.println(data);
             unit = jsonObject.getString( "unit") ;
             btime = jsonObject.getString( "btime") ;
             ltime = jsonObject.getString( "ltime") ;
             obj = jsonObject.getString( "obj") ;
-            new StudyDao().insertStudy(username, unit, btime, ltime, obj);
+            System.out.println(obj);
+
+            new WorkDao().insertWork(username,unit,btime,ltime,obj);
         }
         out.flush();
         out.close();
-
 
 
     }

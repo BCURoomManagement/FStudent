@@ -42,7 +42,7 @@ public class XsServlet extends HttpServlet {
         switch (type)
         {
             case "1":
-                boolean rs1=new XsDao().insertXs(username, papers, time, periodical);
+                boolean rs1=new XsDao().insertXs(username, papers, time);
                 if (rs1)
                     out.print("true");
                 else
