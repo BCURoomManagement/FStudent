@@ -83,34 +83,65 @@ public class FamilyDao {
     }
 
 
-    public ArrayList<Family> getFamilyByName(String username)
+    public ArrayList<Family> getFamilyByName(String username,String type)
     {
-        ArrayList<Family> list=new ArrayList<Family>();
+        if (type.equals("0")){
+            ArrayList<Family> list=new ArrayList<Family>();
 
-        String sql="select * from  overseas.family where username=?";
-        Connection conn=util.getConnection();
-        try {
-            PreparedStatement pstmt=conn.prepareStatement(sql);
-            pstmt.setString(1,username);
-            ResultSet rs=pstmt.executeQuery();
-            while (rs.next())
+            String sql="select * from  overseas.family where username=?";
+            Connection conn=util.getConnection();
+            try {
+                PreparedStatement pstmt=conn.prepareStatement(sql);
+                pstmt.setString(1,username);
+                ResultSet rs=pstmt.executeQuery();
+                while (rs.next())
+                {
+                    Family f=new Family();
+                    f.setUsername(rs.getString(1));
+                    f.setName(rs.getString(2));
+                    f.setAge(rs.getString(3));
+                    f.setEmployment(rs.getString(4));
+                    f.setTel(rs.getString(5));
+                    f.setType(rs.getString(6));
+                    list.add(f);
+                }
+                conn.close();
+                return list;
+            }catch (Exception e)
             {
-                Family f=new Family();
-                f.setUsername(rs.getString(1));
-                f.setName(rs.getString(2));
-                f.setAge(rs.getString(3));
-                f.setEmployment(rs.getString(4));
-                f.setTel(rs.getString(5));
-                f.setType(rs.getString(6));
-                list.add(f);
+                e.printStackTrace();
             }
-            conn.close();
-            return list;
-        }catch (Exception e)
-        {
-            e.printStackTrace();
+            return null;
+        }else{
+            ArrayList<Family> list=new ArrayList<Family>();
+
+            String sql="select * from  overseas.family where username=? and type=?";
+            Connection conn=util.getConnection();
+            try {
+                PreparedStatement pstmt=conn.prepareStatement(sql);
+                pstmt.setString(1,username);
+                pstmt.setString(2,type);
+                ResultSet rs=pstmt.executeQuery();
+                while (rs.next())
+                {
+                    Family f=new Family();
+                    f.setUsername(rs.getString(1));
+                    f.setName(rs.getString(2));
+                    f.setAge(rs.getString(3));
+                    f.setEmployment(rs.getString(4));
+                    f.setTel(rs.getString(5));
+                    f.setType(rs.getString(6));
+                    list.add(f);
+                }
+                conn.close();
+                return list;
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            return null;
         }
-        return null;
+
     }
 
 

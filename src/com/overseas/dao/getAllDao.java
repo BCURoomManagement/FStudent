@@ -119,7 +119,7 @@ public class getAllDao {
              *  family type 规定 1：配偶 2：父亲 3：母亲4：子女
              */
 
-            ArrayList<Family> list =new FamilyDao().getFamilyByName(username);
+            ArrayList<Family> list =new FamilyDao().getFamilyByName(username,"0");
 
             for(int i=0;i<4;i++)
             {
