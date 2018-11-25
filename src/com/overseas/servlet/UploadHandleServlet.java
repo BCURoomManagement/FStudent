@@ -157,7 +157,6 @@ public class UploadHandleServlet extends HttpServlet {
      */
     private String makeFileName(String filename){  //2.jpg
         //为防止文件覆盖的现象发生，要为上传文件产生一个唯一的文件
-        System.out.println("3");
         return UUID.randomUUID().toString() + "_" + filename;
 
     }

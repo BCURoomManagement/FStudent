@@ -24,23 +24,23 @@ public class AddXsServlet extends HttpServlet {
         PrintWriter out=resp.getWriter();
 
 
-//        String dataarry = URLDecoder.decode(req.getParameter("domains"),"UTF-8");
-//        String username =  URLDecoder.decode(req.getParameter("username"),"UTF-8");
-//        String papers = null;
-//        String time = null;
-//        String periodical = null;
-//
-//        JSONArray data = JSONArray.fromObject(dataarry);
-//        for (int i=0 ;i<data.size();i++){
-//            JSONObject jsonObject  =  data.getJSONObject(i) ;
-//            System.out.println(data);
-//            papers = jsonObject.getString( "papers") ;
-//            time = jsonObject.getString( "time") ;
-//
-//            new XsDao().insertXs(username, papers, time);
-//        }
-//        out.flush();
-//        out.close();
+        String dataarry = URLDecoder.decode(req.getParameter("domains"),"UTF-8");
+        String username =  URLDecoder.decode(req.getParameter("username"),"UTF-8");
+        String papers = null;
+        String time = null;
+        String periodical = null;
+
+        JSONArray data = JSONArray.fromObject(dataarry);
+        for (int i=0 ;i<data.size();i++){
+            JSONObject jsonObject  =  data.getJSONObject(i) ;
+            System.out.println(data);
+            papers = jsonObject.getString( "papers") ;
+            time = jsonObject.getString( "time") ;
+
+            new XsDao().insertXs(username, papers, time);
+        }
+        out.flush();
+        out.close();
 
 
     }

@@ -24,8 +24,5 @@ public class CheckUserServlet extends HttpServlet {
 
         out.print(new UserDao().checkUser(username,password));
 
-
-
-
     }
 }

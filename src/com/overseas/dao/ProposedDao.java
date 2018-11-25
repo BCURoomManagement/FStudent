@@ -12,7 +12,7 @@ public class ProposedDao {
     DBUtil util=new DBUtil();
     public boolean insertProposed(String username, String degree, String subject, String ym_f, String ym_l, String details)
     {
-        String sql="insert into overseas.processed (username,degree,subject,ym_f,ym_l,details) values (?,?,?,?,?,?)";
+        String sql="insert into overseas.proposed (username,degree,subject,ym_f,ym_l,details) values (?,?,?,?,?,?)";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -57,7 +57,7 @@ public class ProposedDao {
 
     public boolean changeProposed(String username, String degree, String subject, String ym_f, String ym_l, String details)
     {
-        String sql="update overseas.processed set username=?,degree=?,subject=?,ym_f=?,ym_l=?,details=? where username=?";
+        String sql="update overseas.proposed set username=?,degree=?,subject=?,ym_f=?,ym_l=?,details=? where username=?";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -84,7 +84,7 @@ public class ProposedDao {
     public Proposed getProposedByName(String username)
     {
         Proposed p=new Proposed();
-        String sql="select * from overseas.processed where usernanme=?";
+        String sql="select * from overseas.proposed where username=?";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -112,7 +112,7 @@ public class ProposedDao {
     public ArrayList<Proposed> getAllProposed()
     {
        ArrayList<Proposed> list=new ArrayList<Proposed>();
-        String sql="select * from overseas.processed";
+        String sql="select * from overseas.proposed";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);
