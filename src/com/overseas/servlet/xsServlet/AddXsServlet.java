@@ -1,5 +1,6 @@
 package com.overseas.servlet.xsServlet;
 
+import com.overseas.dao.WckDao;
 import com.overseas.dao.XsDao;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -26,6 +27,8 @@ public class AddXsServlet extends HttpServlet {
 
         String dataarry = URLDecoder.decode(req.getParameter("domains"),"UTF-8");
         String username =  URLDecoder.decode(req.getParameter("username"),"UTF-8");
+        String typ = new String(req.getParameter("typ").getBytes("iso8859-1"),"UTF-8");
+        new WckDao().changeWck(username,typ);
         String papers = null;
         String time = null;
         String periodical = null;

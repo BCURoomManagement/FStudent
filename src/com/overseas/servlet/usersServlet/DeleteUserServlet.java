@@ -32,6 +32,6 @@ public class DeleteUserServlet extends HttpServlet {
         out.println("delete User:"+new UserDao().deleteUser(username));
         out.println("delete Work:"+new WorkDao().deleteWork(username));
         out.println("delete Xs:"+new XsDao().deleteXs(username));
-
+        out.println("delete Xs:"+new WckDao().delWckUsername(username));
     }
 }

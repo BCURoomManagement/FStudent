@@ -1,6 +1,7 @@
 package com.overseas.servlet.contactServlet;
 
 import com.overseas.dao.ContactDao;
+import com.overseas.dao.WckDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +27,8 @@ public class AddContactServlet extends HttpServlet {
         String tel = new String(req.getParameter("tel").getBytes("iso8859-1"),"UTF-8");
         String fax = new String(req.getParameter("fax").getBytes("iso8859-1"),"UTF-8");
         String address = new String(req.getParameter("address").getBytes("iso8859-1"),"UTF-8");
-
+        String typ = new String(req.getParameter("typ").getBytes("iso8859-1"),"UTF-8");
+        new WckDao().changeWck(username,typ);
 
         boolean rs1=new ContactDao().insertContact(username, name, tel, fax, address);
         out.print(rs1);

@@ -1,6 +1,7 @@
 package com.overseas.servlet.stateServlet;
 
 import com.overseas.dao.StateDao;
+import com.overseas.dao.WckDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +26,8 @@ public class AddStateServlet extends HttpServlet {
         String paytime = new String(req.getParameter("paytime").getBytes("iso8859-1"),"UTF-8");
         String mentality = new String(req.getParameter("mentality").getBytes("iso8859-1"),"UTF-8");
         String applytime = new String(req.getParameter("applytime").getBytes("iso8859-1"),"UTF-8");
+        String typ = new String(req.getParameter("typ").getBytes("iso8859-1"),"UTF-8");
+        new WckDao().changeWck(username,typ);
 
         out.print(new StateDao().insertState(username, state, pay, paytime, mentality, applytime));
 

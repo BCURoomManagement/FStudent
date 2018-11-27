@@ -1,6 +1,7 @@
 package com.overseas.servlet.usersServlet;
 
 import com.overseas.dao.UserDao;
+import com.overseas.dao.WckDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,6 +27,7 @@ public class AddUserServlet extends HttpServlet {
         if(new UserDao().checkUserName(username))
         {
             out.print(new UserDao().insertUser(username,password,type));
+            new WckDao().insertWck(username);
         }
         else
             out.print("repeat"); //重名

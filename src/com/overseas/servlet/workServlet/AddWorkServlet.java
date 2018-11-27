@@ -1,6 +1,7 @@
 package com.overseas.servlet.workServlet;
 
 import com.overseas.dao.StudyDao;
+import com.overseas.dao.WckDao;
 import com.overseas.dao.WorkDao;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -25,6 +26,8 @@ public class AddWorkServlet extends HttpServlet {
 
         String dataarry = URLDecoder.decode(req.getParameter("domains"),"UTF-8");
         String username =  URLDecoder.decode(req.getParameter("username"),"UTF-8");
+        String typ = new String(req.getParameter("typ").getBytes("iso8859-1"),"UTF-8");
+        new WckDao().changeWck(username,typ);
         String unit = null;
         String btime = null;
         String ltime = null;

@@ -1,6 +1,7 @@
 package com.overseas.servlet.pinfServlet;
 
 import com.overseas.dao.PinfDao;
+import com.overseas.dao.WckDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,8 +40,8 @@ public class AddPinfServlet extends HttpServlet {
         String htel = new String(req.getParameter("htel").getBytes("iso8859-1"),"UTF-8");
         String hfax = new String(req.getParameter("hfax").getBytes("iso8859-1"),"UTF-8");
         String hmail = new String(req.getParameter("hmail").getBytes("iso8859-1"),"UTF-8");
-
+        String typ = new String(req.getParameter("typ").getBytes("iso8859-1"),"UTF-8");
+        new WckDao().changeWck(username,typ);
         out.print(new PinfDao().insertPinf(username, pic, passport_name, family_name, given_name, nationality, passport_no, date_birth, place_birth, sex, marri, religion, address_c, ctel, cfax, cmail, address_h, htel, hfax, hmail));
-
     }
 }

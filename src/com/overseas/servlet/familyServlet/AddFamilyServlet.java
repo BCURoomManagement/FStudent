@@ -1,6 +1,7 @@
 package com.overseas.servlet.familyServlet;
 
 import com.overseas.dao.FamilyDao;
+import com.overseas.dao.WckDao;
 import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -25,6 +26,8 @@ public class AddFamilyServlet extends HttpServlet {
         String Mother = new String(req.getParameter("Mother").getBytes("UTF-8"),"UTF-8");
         String Daughter = new String(req.getParameter("Daughter").getBytes("UTF-8"),"UTF-8");
         String Spouse = new String(req.getParameter("Spouse").getBytes("UTF-8"),"UTF-8");
+        String typ = new String(req.getParameter("typ").getBytes("iso8859-1"),"UTF-8");
+        new WckDao().changeWck(username,typ);
         JSONObject father  =  JSONObject.fromObject(Father) ;
         JSONObject mother  =  JSONObject.fromObject(Mother) ;
         JSONObject daughter  =  JSONObject.fromObject(Daughter) ;

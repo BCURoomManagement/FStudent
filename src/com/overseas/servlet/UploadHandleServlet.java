@@ -1,5 +1,6 @@
 package com.overseas.servlet;
 
+import com.overseas.dao.UploadDao;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.ProgressListener;
@@ -11,10 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,15 +23,20 @@ public class UploadHandleServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = "admin";
-        System.out.println("doGet");
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/json;charset=UTF-8");
+
+        String nusername = new String(request.getParameter("username").getBytes("UTF-8"),"UTF-8");
+        String nfielname = new String(request.getParameter("fielname").getBytes("UTF-8"),"UTF-8");
+        String fieltype = new String(request.getParameter("fieltype").getBytes("UTF-8"),"UTF-8");
         //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
         String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
-        System.out.println(savePath);
+
         //上传时生成的临时文件保存目录
         String tempPath = this.getServletContext().getRealPath("/WEB-INF/temp");
-        System.out.println(tempPath);
         File tmpFile = new File(tempPath);
+
         if (!tmpFile.exists()) {
             //创建临时目录
             tmpFile.mkdir();
@@ -104,12 +107,22 @@ public class UploadHandleServlet extends HttpServlet {
                     //获取item中的上传文件的输入流
                     InputStream in = item.getInputStream();
                     //得到文件保存的名称
-                    String saveFilename = makeFileName(filename);
+                    String saveFilename = makeFileName(nfielname);
                     //得到文件的保存目录
-                    String realSavePath = makePath(saveFilename, savePath,username);
+                    String realSavePath = makePath(saveFilename, savePath,nusername);
+
+
+                    //数据库保存文件路径
+                    if (new UploadDao().getUploadByName(nusername) == null){
+                        new UploadDao().insertUpload(nusername,fieltype,realSavePath);
+                    }else{
+                        new UploadDao().changeUpload(nusername,fieltype,realSavePath);
+                    }
+
+
                     System.out.println(realSavePath);
                     //创建一个文件输出流
-                    FileOutputStream out = new FileOutputStream(realSavePath + "\\" + saveFilename);
+                    FileOutputStream out = new FileOutputStream(realSavePath + "/" + saveFilename);
                     //创建一个缓冲区
                     byte buffer[] = new byte[1024];
                     //判断输入流中的数据是否已经读完的标识
@@ -131,33 +144,27 @@ public class UploadHandleServlet extends HttpServlet {
             }
         }catch (FileUploadBase.FileSizeLimitExceededException e) {
             e.printStackTrace();
-            request.setAttribute("message", "单个文件超出最大值！！！");
-            request.getRequestDispatcher("/message.jsp").forward(request, response);
             return;
         }catch (FileUploadBase.SizeLimitExceededException e) {
             e.printStackTrace();
-            request.setAttribute("message", "上传文件的总的大小超出限制的最大值！！！");
-            request.getRequestDispatcher("/message.jsp").forward(request, response);
             return;
         }catch (Exception e) {
             message= "文件上传失败！";
             e.printStackTrace();
         }
         System.out.println(message);
-        request.setAttribute("message",message);
-        request.getRequestDispatcher("/message.jsp").forward(request, response);
     }
 
     /**
-     * @Method: makeFileName
-     * @Description: 生成上传文件的文件名，文件名以：uuid+"_"+文件的原始名称
-     * @Anthor:孤傲苍狼
-     * @param filename 文件的原始名称
-     * @return uuid+"_"+文件的原始名称
+     *  makeFileName
+     *  生成上传文件的文件名，文件名以：uuid+"_"+文件的原始名称
+     *
+     *  filename 文件的原始名称
+     * uuid+"_"+文件的原始名称
      */
     private String makeFileName(String filename){  //2.jpg
         //为防止文件覆盖的现象发生，要为上传文件产生一个唯一的文件
-        return UUID.randomUUID().toString() + "_" + filename;
+        return filename;
 
     }
 
@@ -178,7 +185,7 @@ public class UploadHandleServlet extends HttpServlet {
 //        int dir1 = hashcode&0xf;  //0--15
 //        int dir2 = (hashcode&0xf0)>>4;  //0-15
         //构造新的保存目录
-        String dir = savePath + "\\" + username ;  //upload\2\3  upload\3\5
+        String dir = savePath + "/" + username ;  //upload\2\3  upload\3\5
         //File既可以代表文件也可以代表目录
         File file = new File(dir);
         //如果目录不存在
