@@ -18,6 +18,9 @@ public class GetAllServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setContentType("text/json;charset=UTF-8");
+        response.setCharacterEncoding("utf-8");
        String username = "Zhang";
         getAllDao freemark = new getAllDao("./template",username);//这里如果放在了具体的包名下，需要修改为 "/com/test/template/"
         freemark.setTemplateName("mode.ftl");

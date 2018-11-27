@@ -27,9 +27,8 @@ public class UploadHandleServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/json;charset=UTF-8");
 
-        String nusername = new String(request.getParameter("username").getBytes("UTF-8"),"UTF-8");
-        String nfielname = new String(request.getParameter("fielname").getBytes("UTF-8"),"UTF-8");
-        String fieltype = new String(request.getParameter("fieltype").getBytes("UTF-8"),"UTF-8");
+        String nusername = null,nfielname=null,fieltype=null;
+
         //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
         String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
 
@@ -82,14 +81,31 @@ public class UploadHandleServlet extends HttpServlet {
             upload.setSizeMax(1024*1024*10);
             //4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
             List<FileItem> list = upload.parseRequest(request);
+
+            int i = 0;
             for(FileItem item : list){
                 //如果fileitem中封装的是普通输入项的数据
                 if(item.isFormField()){
+
+
+
                     String name = item.getFieldName();
                     //解决普通输入项的数据的中文乱码问题
                     String value = item.getString("UTF-8");
                     //value = new String(value.getBytes("iso8859-1"),"UTF-8");
                     System.out.println(name + "=" + value);
+                    switch (i) {
+                        case 0 :
+                            nusername =value;
+                            break;
+                        case 1 :
+                            fieltype =value;
+                            break;
+                        case 2 :
+                             nfielname=value;
+                            break;
+                    }
+                    i++;
                 }else{//如果fileitem中封装的是上传文件
                     //得到上传的文件名称，
                     String filename = item.getName();
@@ -111,18 +127,19 @@ public class UploadHandleServlet extends HttpServlet {
                     //得到文件的保存目录
                     String realSavePath = makePath(saveFilename, savePath,nusername);
 
-
+                    String path = realSavePath+"\\"+saveFilename;
                     //数据库保存文件路径
-                    if (new UploadDao().getUploadByName(nusername) == null){
-                        new UploadDao().insertUpload(nusername,fieltype,realSavePath);
+                    System.out.println(new UploadDao().getUploadByName(nusername)+"  jy1");
+                    if (new UploadDao().getUploadByName(nusername)){
+                        new UploadDao().insertUpload(nusername,fieltype,path);
                     }else{
-                        new UploadDao().changeUpload(nusername,fieltype,realSavePath);
+                        new UploadDao().changeUpload(nusername,fieltype,path);
                     }
 
 
                     System.out.println(realSavePath);
                     //创建一个文件输出流
-                    FileOutputStream out = new FileOutputStream(realSavePath + "/" + saveFilename);
+                    FileOutputStream out = new FileOutputStream(realSavePath + "\\" + saveFilename);
                     //创建一个缓冲区
                     byte buffer[] = new byte[1024];
                     //判断输入流中的数据是否已经读完的标识
@@ -185,7 +202,7 @@ public class UploadHandleServlet extends HttpServlet {
 //        int dir1 = hashcode&0xf;  //0--15
 //        int dir2 = (hashcode&0xf0)>>4;  //0-15
         //构造新的保存目录
-        String dir = savePath + "/" + username ;  //upload\2\3  upload\3\5
+        String dir = savePath + "\\" + username ;  //upload\2\3  upload\3\5
         //File既可以代表文件也可以代表目录
         File file = new File(dir);
         //如果目录不存在

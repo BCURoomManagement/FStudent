@@ -16,6 +16,15 @@ public class Upload {
     private String phy;
     private String psy;
     private String photo;
+    private String lelts2;
+
+    public String getLelts2() {
+        return lelts2;
+    }
+
+    public void setLelts2(String lelts2) {
+        this.lelts2 = lelts2;
+    }
 
     public String getPhoto() {
         return photo;

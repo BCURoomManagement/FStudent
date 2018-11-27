@@ -1,6 +1,5 @@
 package com.overseas.servlet.workServlet;
 
-import com.overseas.dao.StudyDao;
 import com.overseas.dao.WckDao;
 import com.overseas.dao.WorkDao;
 import net.sf.json.JSONArray;
