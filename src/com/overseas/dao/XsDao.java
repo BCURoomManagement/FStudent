@@ -95,7 +95,6 @@ public class XsDao {
                 x.setUsername(rs.getString(1));
                 x.setPapers(rs.getString(2));
                 x.setTime(rs.getString(3));
-                x.setPeriodical(rs.getString(4));
                 list.add(x);
             }
             conn.close();
