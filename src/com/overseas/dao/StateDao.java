@@ -12,7 +12,7 @@ public class StateDao {
     DBUtil util=new DBUtil();
     public boolean insertState(String username, String state, String pay, String paytime, String mentality, String applytime)
     {
-        String sql="insert into overseas.state (username,state,pay,paytime,mentality,applytime) values(?,?,?,?,?,?)";
+        String sql="insert into overseas.state (username,state,pay,paytime,applytime) values(?,?,?,?,?,?)";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -58,7 +58,7 @@ public class StateDao {
 
     public boolean changeState(String username, String state, String pay, String paytime, String mentality, String applytime)
     {
-        String sql="update  overseas.state set username=?,state=?,pay=?,paytime=?,mentality=?,applytime=? where username=?";
+        String sql="update  overseas.state set username=?,state=?,pay=?,paytime=?,applytime=? where username=?";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -66,9 +66,8 @@ public class StateDao {
             pstmt.setString(2,state);
             pstmt.setString(3,pay);
             pstmt.setString(4,paytime);
-            pstmt.setString(5,mentality);
-            pstmt.setString(6,applytime);
-            pstmt.setString(7,username);
+            pstmt.setString(5,applytime);
+            pstmt.setString(6,username);
             if(pstmt.executeUpdate()>0)
             {
                 conn.close();
@@ -97,8 +96,7 @@ public class StateDao {
                s.setState(rs.getString(2));
                s.setPay(rs.getString(3));
                s.setPaytime(rs.getString(4));
-               s.setMentality(rs.getString(5));
-               s.setApplytime(rs.getString(6));
+               s.setApplytime(rs.getString(5));
 
            }
             conn.close();
@@ -127,8 +125,7 @@ public class StateDao {
                 s.setState(rs.getString(2));
                 s.setPay(rs.getString(3));
                 s.setPaytime(rs.getString(4));
-                s.setMentality(rs.getString(5));
-                s.setApplytime(rs.getString(6));
+                s.setApplytime(rs.getString(5));
                 list.add(s);
             }
             conn.close();

@@ -100,5 +100,87 @@ public class UploadDao {
         }
         return true;
     }
+    public String chackUploadl(String username)
+    {
+        String a ="";
+        Upload c=new Upload();
+        String sql="select * from overseas.upold where username=?";
+        Connection conn=util.getConnection();
+        try {
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,username);
+            ResultSet rs=pstmt.executeQuery();
+            rs.next();
+            if(rs.getString(2)==null)
+            {
+                a = a+"/1";
+            }
+            if(rs.getString(3)==null)
+            {
+                a = a+"/2";
 
+            }
+            if(rs.getString(4)==null)
+            {
+                a = a+"/3";
+
+
+            }
+            if(rs.getString(5)==null)
+            {
+                a = a+"/4";
+
+
+            }
+            if(rs.getString(6)==null)
+            {
+                a = a+"/5";
+
+
+            }
+            if(rs.getString(7)==null)
+            {
+                a = a+"/6";
+
+            }
+            if(rs.getString(8)==null)
+            {
+                a = a+"/7";
+
+
+            }
+            if(rs.getString(12)==null)
+            {
+                a = a+"/11";
+
+
+            }
+            if(rs.getString(13)==null)
+            {
+                a = a+"/12";
+
+
+            }
+            if(rs.getString(14)==null)
+            {
+                a = a+"/13";
+
+
+            }
+            if(rs.getString(15)==null)
+            {
+                a = a+"/14";
+            }
+            else{
+                return "0";
+            }
+            conn.close();
+            return a;
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return "500";
+    }
 }

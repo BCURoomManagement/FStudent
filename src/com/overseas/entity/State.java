@@ -5,7 +5,6 @@ public class State {
     private String state;
     private String pay;
     private String paytime;
-    private String mentality;
     private String applytime;
 
     public String getUsername() {
@@ -38,14 +37,6 @@ public class State {
 
     public void setPaytime(String paytime) {
         this.paytime = paytime;
-    }
-
-    public String getMentality() {
-        return mentality;
-    }
-
-    public void setMentality(String mentality) {
-        this.mentality = mentality;
     }
 
     public String getApplytime() {
