@@ -1,4 +1,4 @@
-package com.overseas.servlet;
+package com.overseas.servlet.uploadServlet;
 
 import com.overseas.dao.UploadDao;
 import org.apache.commons.fileupload.FileItem;
@@ -27,7 +27,7 @@ public class UploadHandleServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/json;charset=UTF-8");
 
-        String nusername = null,nfielname=null,fieltype=null;
+        String nusername = null,nfielname=null,fieltype=null,packname=null;
 
         //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
         String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
@@ -92,7 +92,7 @@ public class UploadHandleServlet extends HttpServlet {
                     String name = item.getFieldName();
                     //解决普通输入项的数据的中文乱码问题
                     String value = item.getString("UTF-8");
-                    //value = new String(value.getBytes("iso8859-1"),"UTF-8");
+                    //value = new String(value.getBytes("UTF-8"),"UTF-8");
                     System.out.println(name + "=" + value);
                     switch (i) {
                         case 0 :
@@ -103,6 +103,9 @@ public class UploadHandleServlet extends HttpServlet {
                             break;
                         case 2 :
                              nfielname=value;
+                            break;
+                        case 3 :
+                            packname=value;
                             break;
                     }
                     i++;
@@ -125,7 +128,7 @@ public class UploadHandleServlet extends HttpServlet {
                     //得到文件保存的名称
                     String saveFilename = makeFileName(nfielname);
                     //得到文件的保存目录
-                    String realSavePath = makePath(saveFilename, savePath,nusername);
+                    String realSavePath = makePath(saveFilename, savePath,packname);
 
                     String path = realSavePath+"\\"+saveFilename;
                     //数据库保存文件路径

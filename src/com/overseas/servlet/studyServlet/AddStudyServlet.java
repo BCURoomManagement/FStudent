@@ -26,7 +26,7 @@ public class AddStudyServlet extends HttpServlet {
 
         String dataarry = URLDecoder.decode(req.getParameter("domains"),"UTF-8");
         String username =  URLDecoder.decode(req.getParameter("username"),"UTF-8");
-        String typ = new String(req.getParameter("typ").getBytes("iso8859-1"),"UTF-8");
+        String typ = new String(req.getParameter("typ").getBytes("UTF-8"),"UTF-8");
         new WckDao().changeWck(username,typ);
         String unit = null;
         String btime = null;

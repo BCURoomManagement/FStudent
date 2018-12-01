@@ -1,6 +1,5 @@
 package com.overseas.dao;
 
-import com.overseas.entity.Contact;
 import com.overseas.entity.Upload;
 import com.overseas.util.DBUtil;
 
@@ -86,6 +85,7 @@ public class UploadDao {
             PreparedStatement pstmt=conn.prepareStatement(sql);
             pstmt.setString(1,username);
             ResultSet rs=pstmt.executeQuery();
+            rs.next();
             if(rs.getString(2)==null||rs.getString(3)==null||rs.getString(4)==null||rs.getString(5)==null||rs.getString(6)==null||rs.getString(7)==null||rs.getString(8)==null||rs.getString(12)==null||rs.getString(13)==null)
             {
                 conn.close();
@@ -146,12 +146,27 @@ public class UploadDao {
             if(rs.getString(8)==null)
             {
                 a = a+"/7";
-
-
+            }
+            if(rs.getString(9)==null)
+            {
+                a = a+"/8";
+            }
+            if(rs.getString(10)==null)
+            {
+                a = a+"/9";
+            }
+            if(rs.getString(11)==null)
+            {
+                a = a+"/10";
             }
             if(rs.getString(12)==null)
             {
                 a = a+"/11";
+
+            }
+            if(rs.getString(16)==null)
+            {
+                a = a+"/13";
 
 
             }
@@ -159,17 +174,15 @@ public class UploadDao {
             {
                 a = a+"/12";
 
-
             }
             if(rs.getString(14)==null)
             {
-                a = a+"/13";
-
+                a = a+"/14";
 
             }
             if(rs.getString(15)==null)
             {
-                a = a+"/14";
+                a = a+"/15";
             }
             else{
                 return "0";
@@ -182,5 +195,33 @@ public class UploadDao {
             e.printStackTrace();
         }
         return "500";
+    }
+    public boolean chackUploadlx(String username)
+    {
+        String a ="";
+        Upload c=new Upload();
+        String sql="select * from overseas.upold where username=?";
+        Connection conn=util.getConnection();
+        try {
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,username);
+            ResultSet rs=pstmt.executeQuery();
+            rs.next();
+            if(rs.getString(14)==null)
+            {
+                conn.close();
+                return false;
+            }
+            else{
+                return true;
+            }
+
+
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

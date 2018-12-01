@@ -25,11 +25,12 @@ public class ChangeStudyServlet extends HttpServlet {
 
         String dataarry = URLDecoder.decode(req.getParameter("domains"),"UTF-8");
         String username =  URLDecoder.decode(req.getParameter("username"),"UTF-8");
+        String typ = URLDecoder.decode(req.getParameter("typ"),"UTF-8");
         String unit = null;
         String btime = null;
         String ltime = null;
         String obj = null;
-
+        new StudyDao().deleteStudy(username);
 //2、使用JSONArray
         JSONArray data = JSONArray.fromObject(dataarry);
         for (int i=0 ;i<data.size();i++){
@@ -39,7 +40,7 @@ public class ChangeStudyServlet extends HttpServlet {
             btime = jsonObject.getString( "fromdate") ;
             ltime = jsonObject.getString( "todate") ;
             obj = jsonObject.getString( "Fields") ;
-            new StudyDao().changeStudy(username, unit, btime, ltime, obj);
+            new StudyDao().insertStudy(username, unit, btime, ltime, obj);
         }
         out.flush();
         out.close();

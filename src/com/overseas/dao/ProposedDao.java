@@ -99,7 +99,6 @@ public class ProposedDao {
               p.setYm_l(rs.getString(5));
               p.setDetails(rs.getString(6));
           }
-
             conn.close();
             return p;
         }catch (Exception e)

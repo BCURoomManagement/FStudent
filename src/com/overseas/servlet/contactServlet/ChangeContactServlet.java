@@ -20,11 +20,12 @@ public class ChangeContactServlet extends HttpServlet {
         resp.setContentType("text/json;charset=UTF-8");
         PrintWriter out=resp.getWriter();
 
-        String username = new String(req.getParameter("username").getBytes("iso8859-1"),"UTF-8");
-        String name = new String(req.getParameter("name").getBytes("iso8859-1"),"UTF-8");
-        String tel = new String(req.getParameter("tel").getBytes("iso8859-1"),"UTF-8");
-        String fax = new String(req.getParameter("fax").getBytes("iso8859-1"),"UTF-8");
-        String address = new String(req.getParameter("address").getBytes("iso8859-1"),"UTF-8");
+        String username = new String(req.getParameter("username").getBytes("UTF-8"),"UTF-8");
+        String name = new String(req.getParameter("name").getBytes("UTF-8"),"UTF-8");
+        String tel = new String(req.getParameter("tel").getBytes("UTF-8"),"UTF-8");
+        String fax = new String(req.getParameter("fax").getBytes("UTF-8"),"UTF-8");
+        String address = new String(req.getParameter("address").getBytes("UTF-8"),"UTF-8");
+        String typ = new String(req.getParameter("typ").getBytes("UTF-8"),"UTF-8");
 
         boolean rs3=new ContactDao().changeContact(username, name, tel, fax, address);
         out.print(rs3);

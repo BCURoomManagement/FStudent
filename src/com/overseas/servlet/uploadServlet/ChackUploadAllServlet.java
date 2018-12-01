@@ -1,4 +1,4 @@
-package com.overseas.servlet;
+package com.overseas.servlet.uploadServlet;
 
 import com.overseas.dao.UploadDao;
 
@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 
-@WebServlet("/ChackUploadServlet")
-public class ChackUploadServlet extends HttpServlet {
+@WebServlet("/ChackUploadAllServlet")
+public class ChackUploadAllServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -23,9 +23,8 @@ public class ChackUploadServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         String username =  URLDecoder.decode(request.getParameter("username"),"UTF-8");
         PrintWriter out=response.getWriter();
-        out.print(new UploadDao().chackUpload(username));
+        out.print(new UploadDao().chackUploadl(username));
         out.flush();
         out.close();
-
     }
 }

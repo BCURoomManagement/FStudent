@@ -18,13 +18,12 @@ public class ChangeStateServlet extends HttpServlet {
         resp.setContentType("text/json;charset=UTF-8");
 
         PrintWriter out=resp.getWriter();
-        String username = new String(req.getParameter("username").getBytes("iso8859-1"),"UTF-8");
-        String state = new String(req.getParameter("state").getBytes("iso8859-1"),"UTF-8");
-        String pay = new String(req.getParameter("pay").getBytes("iso8859-1"),"UTF-8");
-        String paytime = new String(req.getParameter("paytime").getBytes("iso8859-1"),"UTF-8");
-        String mentality = new String(req.getParameter("mentality").getBytes("iso8859-1"),"UTF-8");
-        String applytime = new String(req.getParameter("applytime").getBytes("iso8859-1"),"UTF-8");
+        String username = new String(req.getParameter("username").getBytes("UTF-8"),"UTF-8");
+        String state = new String(req.getParameter("state").getBytes("UTF-8"),"UTF-8");
+        String pay = new String(req.getParameter("pay").getBytes("UTF-8"),"UTF-8");
+        String paytime = new String(req.getParameter("paytime").getBytes("UTF-8"),"UTF-8");
+        String applytime = new String(req.getParameter("applytime").getBytes("UTF-8"),"UTF-8");
 
-        out.print(new StateDao().changeState(username, state, pay, paytime, mentality, applytime));
+        out.print(new StateDao().changeState(username,pay,paytime));
     }
 }

@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 public class StateDao {
     DBUtil util=new DBUtil();
-    public boolean insertState(String username, String state, String pay, String paytime, String mentality, String applytime)
+    public boolean insertState(String username, String state, String pay, String paytime, String applytime)
     {
-        String sql="insert into overseas.state (username,state,pay,paytime,applytime) values(?,?,?,?,?,?)";
+        String sql="insert into overseas.state (username,state,pay,paytime,applytime) values(?,?,?,?,?)";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -20,8 +20,7 @@ public class StateDao {
             pstmt.setString(2,state);
             pstmt.setString(3,pay);
             pstmt.setString(4,paytime);
-            pstmt.setString(5,mentality);
-            pstmt.setString(6,applytime);
+            pstmt.setString(5,applytime);
             if(pstmt.executeUpdate()>0)
             {
                 conn.close();
@@ -37,7 +36,7 @@ public class StateDao {
 
     public boolean deleteState(String username)
     {
-        String sql="delete fornm overseas.state where username=?";
+        String sql="delete from overseas.state where username=?";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -56,18 +55,15 @@ public class StateDao {
         return false;
     }
 
-    public boolean changeState(String username, String state, String pay, String paytime, String mentality, String applytime)
+    public boolean changeState(String username, String pay, String paytime)
     {
-        String sql="update  overseas.state set username=?,state=?,pay=?,paytime=?,applytime=? where username=?";
+        String sql="update  overseas.state set pay=?,paytime=? where username=?";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);
-            pstmt.setString(1,username);
-            pstmt.setString(2,state);
-            pstmt.setString(3,pay);
-            pstmt.setString(4,paytime);
-            pstmt.setString(5,applytime);
-            pstmt.setString(6,username);
+            pstmt.setString(1,pay);
+            pstmt.setString(2,paytime);
+            pstmt.setString(3,username);
             if(pstmt.executeUpdate()>0)
             {
                 conn.close();
@@ -130,7 +126,6 @@ public class StateDao {
             }
             conn.close();
             return list;
-
         }catch (Exception e)
         {
             e.printStackTrace();

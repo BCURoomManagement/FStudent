@@ -26,18 +26,19 @@ public class ChangeXsServlet extends HttpServlet {
 
         String dataarry = URLDecoder.decode(req.getParameter("domains"),"UTF-8");
         String username =  URLDecoder.decode(req.getParameter("username"),"UTF-8");
+        String typ = URLDecoder.decode(req.getParameter("typ"),"UTF-8");
         String papers = null;
         String time = null;
         String periodical = null;
 
+        out.print(new XsDao().deleteXs(username));
         JSONArray data = JSONArray.fromObject(dataarry);
         for (int i=0 ;i<data.size();i++){
             JSONObject jsonObject  =  data.getJSONObject(i) ;
             System.out.println(data);
             papers = jsonObject.getString( "papers") ;
             time = jsonObject.getString( "time") ;
-
-            new XsDao().changeXs(username, papers, time, periodical);
+            new XsDao().insertXs(username, papers, time);
         }
         out.flush();
         out.close();

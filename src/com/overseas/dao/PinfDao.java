@@ -51,7 +51,7 @@ public class PinfDao {
 
     public boolean changePinf(String username, String pic, String passportName, String familyName, String givenName, String nationality, String passportNo, String dateBirth, String placeBirth, String sex, String marri, String religion, String addressC, String ctel, String cfax, String cmail, String addressH, String htel, String hfax, String hmail)
     {
-        String sql="update overseas.pinf set set username=? ,pic=?,passport_name=?,family_name=?,given_name=?,nationality=?,passport_no=?,date_birth=?,place_birth=?,sex=?,marri=?,religion=?,address_c=?,ctel=?,cfax=?,cmail=?,address_h=?,htel=?,hfax=?,hmail=? where username=?";
+        String sql="update overseas.pinf set username=? ,pic=?,passport_name=?,family_name=?,given_name=?,nationality=?,passport_no=?,date_birth=?,place_birth=?,sex=?,marri=?,religion=?,address_c=?,ctel=?,cfax=?,cmail=?,address_h=?,htel=?,hfax=?,hmail=? where username=?";
         Connection conn=util.getConnection();
         try {
             PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -75,6 +75,7 @@ public class PinfDao {
             pstmt.setString(18,htel);
             pstmt.setString(19,hfax);
             pstmt.setString(20,hmail);
+            pstmt.setString(21,username);
             if (pstmt.executeUpdate()>0)
             {
                 conn.close();

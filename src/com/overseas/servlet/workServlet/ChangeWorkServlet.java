@@ -24,9 +24,13 @@ public class ChangeWorkServlet extends HttpServlet {
 
         String dataarry = URLDecoder.decode(req.getParameter("domains"),"UTF-8");
         String username =  URLDecoder.decode(req.getParameter("username"),"UTF-8");
+        String typ = URLDecoder.decode(req.getParameter("typ"),"UTF-8");
         String unit = null;
         String btime = null;
         String ltime = null;
+        String obj = null;
+
+        new WorkDao().deleteWork(username);
 
         JSONArray data = JSONArray.fromObject(dataarry);
         for (int i=0 ;i<data.size();i++){
@@ -34,8 +38,9 @@ public class ChangeWorkServlet extends HttpServlet {
             unit = jsonObject.getString( "unit") ;
             btime = jsonObject.getString( "btime") ;
             ltime = jsonObject.getString( "ltime") ;
+            obj = jsonObject.getString( "obj") ;
 
-            new WorkDao().changeWork(username, unit, btime, ltime);
+            new WorkDao().insertWork(username,unit,btime,ltime,obj);
         }
         out.flush();
         out.close();

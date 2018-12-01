@@ -26,7 +26,7 @@ public class AddFamilyServlet extends HttpServlet {
         String Mother = new String(req.getParameter("Mother").getBytes("UTF-8"),"UTF-8");
         String Daughter = new String(req.getParameter("Daughter").getBytes("UTF-8"),"UTF-8");
         String Spouse = new String(req.getParameter("Spouse").getBytes("UTF-8"),"UTF-8");
-        String typ = new String(req.getParameter("typ").getBytes("iso8859-1"),"UTF-8");
+        String typ = new String(req.getParameter("typ").getBytes("UTF-8"),"UTF-8");
         new WckDao().changeWck(username,typ);
         JSONObject father  =  JSONObject.fromObject(Father) ;
         JSONObject mother  =  JSONObject.fromObject(Mother) ;
